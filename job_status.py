@@ -1,4 +1,5 @@
-from errbot import BotPlugin, botcmd, subprocess
+from errbot import BotPlugin, botcmd
+import subprocess
 
 class AutoSysJob(BotPlugin):
     """AutoSys job plugin for Errbot"""
