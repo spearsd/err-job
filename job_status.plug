@@ -1,0 +1,9 @@
+[Core]
+Name = AutoSysJob
+Module = job_status
+
+[Python]
+Version = 3
+
+[Documentation]
+Description = AutoSys plugin
