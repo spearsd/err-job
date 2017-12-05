@@ -20,7 +20,7 @@ class AutoSysJob(BotPlugin):
         #t.add_row([args, '10/28/2017 22:35:03', '10/28/2017 22:35:52', 'SU', '157897088/1', '0'])
         #string = "Job Name                                                           Last Start           Last End             ST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + "                                         10/28/2017 22:35:03  10/28/2017 22:35:52  SU 157897088/1 0"
         #string2 = "\nJob Name\tLast Start\tLast End\tST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + ""
-        string = "Job Name\t\t\t\t\tLast Start\t\t\t\t\t\tLast End\t\t\t\t\t\tST\t\tRun/Ntry\t\t\t\tPri/Xit"
+        string = "Job Name\t\t\t\t\t\t\t\t\t\t\t\t\tLast Start\t\t\t\t\t\tLast End\t\t\t\t\t\tST\t\tRun/Ntry\t\t\t\tPri/Xit"
         string += "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n"
         string += job_name + "\t\t\t\t\t10/28/2017 22:35:03\t\t10/28/2017 22:35:52\t\tSU\t157897088/1\t0"
         return string
