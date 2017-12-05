@@ -16,8 +16,7 @@ class AutoSysJob(BotPlugin):
         #    tempf.seek(0)
         #    string = str(string) + str(tempf.read())
         t = PrettyTable(['Job Name', 'Last Start', 'Last End', 'ST', 'Run/Ntry', 'Pri/Xit'])
-        for job_name in args:
-            t.add_row([job_name, '10/28/2017 22:35:03', '10/28/2017 22:35:52', 'SU', '157897088/1', '0'])
+        t.add_row([args, '10/28/2017 22:35:03', '10/28/2017 22:35:52', 'SU', '157897088/1', '0'])
         string = "Job Name                                                           Last Start           Last End             ST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + "                                         10/28/2017 22:35:03  10/28/2017 22:35:52  SU 157897088/1 0"
         string2 = "\nJob Name\tLast Start\tLast End\tST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + ""
         return t
