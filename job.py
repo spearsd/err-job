@@ -1,4 +1,5 @@
 from errbot import BotPlugin, botcmd
+from prettytable import PrettyTable
 import subprocess, tempfile, re, time
 
 class AutoSysJob(BotPlugin):
@@ -9,15 +10,17 @@ class AutoSysJob(BotPlugin):
         """Return job status"""
         string = ""
         string_multi = ""
-        job_name = args
         #with tempfile.TemporaryFile() as tempf:
         #    proc = subprocess.Popen(['ls','-l'], stdout=tempf)
         #    proc.wait()
         #    tempf.seek(0)
         #    string = str(string) + str(tempf.read())
+        t = PrettyTable(['Job Name', 'Last Start', 'Last End', 'ST', 'Run/Ntry', 'Pri/Xit'])
+        for job_name in args:
+            t.add_row([job_name, '10/28/2017 22:35:03', '10/28/2017 22:35:52', 'SU', '157897088/1', '0'])
         string = "Job Name                                                           Last Start           Last End             ST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + "                                         10/28/2017 22:35:03  10/28/2017 22:35:52  SU 157897088/1 0"
-        string2 = "\nJob Name\tLast Start\tLast End\tST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + "\t10/28/2017 22:35:03\t10/28/2017 22:35:52\tSU 157897088/1 0"
-        return string2
+        string2 = "\nJob Name\tLast Start\tLast End\tST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + ""
+        return t
     
     @botcmd
     def job_start(self, msg, args):
