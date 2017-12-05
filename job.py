@@ -1,5 +1,4 @@
 from errbot import BotPlugin, botcmd
-from prettytable import PrettyTable
 import subprocess, tempfile, re, time
 
 class AutoSysJob(BotPlugin):
