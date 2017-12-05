@@ -15,11 +15,6 @@ class AutoSysJob(BotPlugin):
         #    proc.wait()
         #    tempf.seek(0)
         #    string = str(string) + str(tempf.read())
-        #string_array = string.split("\\n")
-        #for s in string_array:
-        #    string_multi = string_multi + s
-        #return "```" + string_multi
-        #return "```" + re.sub(r"\\", "\\\\", str(string))
         string = "Job Name                                                           Last Start           Last End             ST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + "                                         10/28/2017 22:35:03  10/28/2017 22:35:52  SU 157897088/1 0"
         return string
     
@@ -29,16 +24,6 @@ class AutoSysJob(BotPlugin):
         string = ""
         string_multi = ""
         job_name = args
-        #with tempfile.TemporaryFile() as tempf:
-        #    proc = subprocess.Popen(['ls','-l'], stdout=tempf)
-        #    proc.wait()
-        #    tempf.seek(0)
-        #    string = str(string) + str(tempf.read())
-        #string_array = string.split("\\n")
-        #for s in string_array:
-        #    string_multi = string_multi + s
-        #return "```" + string_multi
-        #return "```" + re.sub(r"\\", "\\\\", str(string))
         yield "Starting " + job_name + "..."
         time.sleep(2)
         yield job_name + " has started."
