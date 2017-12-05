@@ -18,7 +18,7 @@ class AutoSysJob(BotPlugin):
         #t = PrettyTable(['Job Name', 'Last Start', 'Last End', 'ST', 'Run/Ntry', 'Pri/Xit'])
         #t.add_row([args, '10/28/2017 22:35:03', '10/28/2017 22:35:52', 'SU', '157897088/1', '0'])
         #string = "Job Name                                                           Last Start           Last End             ST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + "                                         10/28/2017 22:35:03  10/28/2017 22:35:52  SU 157897088/1 0"
-        string = "Job Name:   \t" + job_name
+        string = "Job Name:  \t" + job_name
         string += "\nLast Start: \t" + "10/28/2017 22:35:03"
         string += "\nLast End: \t\t" + "10/28/2017 22:35:52"
         string += "\nST: \t\t\t\t" + "SU"
