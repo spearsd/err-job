@@ -10,6 +10,7 @@ class AutoSysJob(BotPlugin):
         """Return job status"""
         string = ""
         string_multi = ""
+        job_name = args
         #with tempfile.TemporaryFile() as tempf:
         #    proc = subprocess.Popen(['ls','-l'], stdout=tempf)
         #    proc.wait()
