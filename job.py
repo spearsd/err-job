@@ -19,7 +19,7 @@ class AutoSysJob(BotPlugin):
     
     @botcmd
     def job_start(self, msg, args):
-        """Return job has started"""
+        """Start requested job"""
         job_name = args
         yield "Starting " + job_name + "..."
         time.sleep(3)
