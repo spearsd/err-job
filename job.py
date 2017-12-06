@@ -8,16 +8,7 @@ class AutoSysJob(BotPlugin):
     def job_status(self, msg, args):
         """Return job status"""
         string = ""
-        string_multi = ""
         job_name = args
-        #with tempfile.TemporaryFile() as tempf:
-        #    proc = subprocess.Popen(['ls','-l'], stdout=tempf)
-        #    proc.wait()
-        #    tempf.seek(0)
-        #    string = str(string) + str(tempf.read())
-        #t = PrettyTable(['Job Name', 'Last Start', 'Last End', 'ST', 'Run/Ntry', 'Pri/Xit'])
-        #t.add_row([args, '10/28/2017 22:35:03', '10/28/2017 22:35:52', 'SU', '157897088/1', '0'])
-        #string = "Job Name                                                           Last Start           Last End             ST Run/Ntry Pri/Xit" + "\n____________________________________________________________________________________________ ____________________ ____________________ __ ________ _______" + "\n" + job_name + "                                         10/28/2017 22:35:03  10/28/2017 22:35:52  SU 157897088/1 0"
         string = "Job Name:  \t" + job_name
         string += "\nLast Start: \t" + "10/28/2017 22:35:03"
         string += "\nLast End: \t\t" + "10/28/2017 22:35:52"
@@ -28,21 +19,16 @@ class AutoSysJob(BotPlugin):
     
     @botcmd
     def job_start(self, msg, args):
-        """Return job status"""
-        string = ""
-        string_multi = ""
+        """Return job has started"""
         job_name = args
         yield "Starting " + job_name + "..."
-        time.sleep(2)
+        time.sleep(3)
         yield job_name + " has started."
-        
-    @botcmd
-    def ls(self, msg, args):
-        """Return job status"""
-        string = ""
-        with tempfile.TemporaryFile() as tempf:
-            proc = subprocess.Popen(['ls','-l',args], stdout=tempf)
-            proc.wait()
-            tempf.seek(0)
-            string = str(string) + str(tempf.read())
-        return string
+
+    
+# Used to run commands in terminal and capture the result in string var.
+#with tempfile.TemporaryFile() as tempf:
+#    proc = subprocess.Popen(['ls','-l'], stdout=tempf)
+#    proc.wait()
+#    tempf.seek(0)
+#    string = str(string) + str(tempf.read())
