@@ -35,3 +35,14 @@ class AutoSysJob(BotPlugin):
         yield "Starting " + job_name + "..."
         time.sleep(2)
         yield job_name + " has started."
+        
+    @botcmd
+    def ls(self, msg, args):
+        """Return job status"""
+        string = ""
+        with tempfile.TemporaryFile() as tempf:
+            proc = subprocess.Popen(['ls','-l',args], stdout=tempf)
+            proc.wait()
+            tempf.seek(0)
+            string = str(string) + str(tempf.read())
+        return string
