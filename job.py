@@ -12,7 +12,7 @@ class AutoSysJob(BotPlugin):
         target_server = ""
         with open('/var/errbot/target_server', 'r') as file:
             target_server = str(file.read())
-        string = "Server:  \t" + target_server 
+        string = "Server:  \t\t" + target_server 
         string += "Job Name:  \t" + job_name
         string += "\nLast Start: \t" + "10/28/2017 22:35:03"
         string += "\nLast End: \t\t" + "10/28/2017 22:35:52"
