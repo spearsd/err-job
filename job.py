@@ -12,23 +12,24 @@ class AutoSysJob(BotPlugin):
         string = "Job Name:  \t" + job_name
         string += "\nLast Start: \t" + "10/28/2017 22:35:03"
         string += "\nLast End: \t\t" + "10/28/2017 22:35:52"
-        string += "\nST: \t\t\t\t" + "SU"
-        string += "\nRun/Ntry: \t\t" + "157897088/1"
-        string += "\nPri/Xit:\t\t\t" + "0"
+        string += "\nStatus: \t\t\t" + "Success"
         return string
     
+    # This method would attempt to loggin to the server listed in /var/errbot/target_server
+    # then after logging in, source into P11 instance by executing . /export/apps/sched/autouser/autosys.bash.P11
+    # finally continue trying to start start the job
+    # optionally, the method could be configured to continually poll the job for X time looking for a SU status.
     @botcmd
     def job_start(self, msg, args):
         """Start requested job"""
         job_name = args
-        yield "Starting " + job_name + "..."
+        target_server = ""
+        with open('/var/errbot/target_server', 'r') as file:
+            target_server = str(file.read())
+        #login
+        #source file
+        yield "Starting " + job_name + " on " + target_server + "..."
+        #poll for RU status
         time.sleep(3)
         yield job_name + " has started."
-
-    
-# Used to run commands in terminal and capture the result in string var.
-#with tempfile.TemporaryFile() as tempf:
-#    proc = subprocess.Popen(['ls','-l'], stdout=tempf)
-#    proc.wait()
-#    tempf.seek(0)
-#    string = str(string) + str(tempf.read())
+        #optionally poll for SU status
