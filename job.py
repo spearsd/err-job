@@ -16,7 +16,7 @@ class AutoSysJob(BotPlugin):
         string += "Job Name:  \t" + job_name
         string += "\nLast Start: \t" + "10/28/2017 22:35:03"
         string += "\nLast End: \t\t" + "10/28/2017 22:35:52"
-        string += "\nStatus: \t\t\t" + "Success"
+        string += "\nStatus: \t\t" + "Success"
         return string
     
     # This method would attempt to loggin to the server listed in /var/errbot/target_server
