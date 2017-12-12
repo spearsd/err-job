@@ -17,7 +17,7 @@ class AutoSysJob(BotPlugin):
         string += "\nLast Start: \t" + "10/28/2017 22:35:03"
         string += "\nLast End: \t\t" + "10/28/2017 22:35:52"
         string += "\nStatus: \t\t" + "Success"
-        return self.get_plugin('AutoSysServer')
+        return str(self.get_plugin('AutoSysServer'))
     
     # This method would attempt to loggin to the server listed in /var/errbot/target_server
     # then after logging in, source into P11 instance by executing . /export/apps/sched/autouser/autosys.bash.P11
