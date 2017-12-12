@@ -9,7 +9,7 @@ class AutoSysJob(BotPlugin):
         """Return job status"""
         string = ""
         job_name = args
-        target_server = self.get_plugin('AutoSysServer')
+        target_server = self.get_plugin('AutoSysServer').target_server
         #with open('/var/errbot/target_server', 'r') as file:
         #    target_server = str(file.read())
         string = "Server:  \t\t" + target_server 
@@ -17,8 +17,7 @@ class AutoSysJob(BotPlugin):
         string += "\nLast Start: \t" + "10/28/2017 22:35:03"
         string += "\nLast End: \t\t" + "10/28/2017 22:35:52"
         string += "\nStatus: \t\t" + "Success"
-        for each in self.get_plugin('AutoSysServer'):
-            yield each
+        return string
     
     # This method would attempt to loggin to the server listed in /var/errbot/target_server
     # then after logging in, source into P11 instance by executing . /export/apps/sched/autouser/autosys.bash.P11
