@@ -14,8 +14,8 @@ class AutoSysJob(BotPlugin):
         #    target_server = str(file.read())
         string = "Server:  \t\t" + target_server 
         string += "\nJob Name:  \t" + job_name
-        string += "\nLast Start: \t" + "10/28/2017 22:35:03"
-        string += "\nLast End: \t\t" + "10/28/2017 22:35:52"
+        string += "\nLast Start: \t" + "01/08/2018 22:35:03"
+        string += "\nLast End: \t\t" + "01/08/2018 22:35:52"
         string += "\nStatus: \t\t" + "Success"
         return string
     
@@ -36,4 +36,10 @@ class AutoSysJob(BotPlugin):
         #poll for RU status
         time.sleep(3)
         yield job_name + " has started."
+        string = "Server:  \t\t" + target_server 
+        string += "\nJob Name:  \t" + job_name
+        string += "\nLast Start: \t" + "01/08/2018 21:35:03"
+        string += "\nLast End: \t\t" + "01/08/2018 21:35:52"
+        string += "\nStatus: \t\t" + "Running"
+        yield string
         #optionally poll for SU status
