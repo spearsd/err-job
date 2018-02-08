@@ -4,9 +4,13 @@ import subprocess, tempfile, re, time
 class AutoSysJob(BotPlugin):
     """AutoSys job plugin for Errbot"""
 
-    #def ssh(self, command):
-    #    subprocess.check_output(["sshpass", "-p", "$(gpg2 --batch --passphrase $ERRBOT_PASS -a -d /root/.password-store/dustin.gpg)", "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no" "dustin@prod1 'df -h'"
-    
+    def ssh(self, msg, command):
+        user_array = msg.frm.split("@")
+        username = user_array[0]
+        gpg_string = "$(gpg2 --batch --passphrase $ERRBOT_PASS -a -d /root/.password-store/" + username + ".gpg)"
+        user_server = username + "@" + str(self.get_plugin('AutoSysServer').target_server)
+        output = subprocess.check_output(["sshpass", "-p", gpg_string, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command], shell=True)
+        return output
     
     @botcmd
     def job_status(self, msg, args):
@@ -14,9 +18,18 @@ class AutoSysJob(BotPlugin):
         string = ""
         job_name = args
         target_server = self.get_plugin('AutoSysServer').target_server
+        command = "AutoSysJob " + job_name
+        
+        if target_server == "":
+            result = "Target server not set. Set the target server using !server target (servername)."
+        else:
+            result = ssh(msg, command)
+            
+        if result.find("Job Name:") == -1:
+            result = "Cannot connect to targeted server with your user."
         
         #subprocess.check_output()
-        return msg.frm
+        return result
         
         ###################################################################
         #with open('/var/errbot/target_server', 'r') as file:
