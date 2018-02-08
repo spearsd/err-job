@@ -30,10 +30,9 @@ class AutoSysJob(BotPlugin):
             
         if error == "":
             command = "AutoSysJob " + job_name
-            result = str(self.ssh(msg, command))
-            
-        if result.find("Job Name:") == -1:
-            error = "Cannot connect to targeted server with your user."
+            result = str(self.ssh(msg, command))  
+            if result.find("Job Name:") == -1:
+                error = "Cannot connect to targeted server with your user."
         
         if error:
             return error
@@ -72,9 +71,8 @@ class AutoSysJob(BotPlugin):
             yield "Starting " + job_name + " on " + target_server + "..."
             time.sleep(3)
             result = str(self.ssh(msg, command))
-            
-        if result.find("Job Name:") == -1:
-            error = "Cannot connect to targeted server with your user."
+            if result.find("Job Name:") == -1:
+                error = "Cannot connect to targeted server with your user."
         
         if error:
             return error
