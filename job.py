@@ -9,8 +9,8 @@ class AutoSysJob(BotPlugin):
         username = user_array[0]
         gpg_string = "$(gpg2 --batch --passphrase $ERRBOT_PASS -a -d /root/.password-store/" + username + ".gpg)"
         user_server = username + "@" + self.get_plugin('AutoSysServer').target_server
-        #output = subprocess.check_output(["sshpass", "-p", gpg_string, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
-        output = subprocess.check_output(["whoami"])
+        print(user_server)
+        output = subprocess.check_output(["sshpass", "-p", gpg_string, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
         return output
     
     @botcmd
