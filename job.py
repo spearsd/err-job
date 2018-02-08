@@ -26,8 +26,8 @@ class AutoSysJob(BotPlugin):
         else:
             result = self.ssh(msg, command)
             
-        if result.find("Job Name:") == -1:
-            result = "Cannot connect to targeted server with your user."
+        #if result.find("Job Name:") == -1:
+        #    result = "Cannot connect to targeted server with your user."
         
         #subprocess.check_output()
         return result
