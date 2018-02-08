@@ -14,7 +14,10 @@ class AutoSysJob(BotPlugin):
         user_pass_temp = subprocess.check_output(["gpg2", "--batch", "--passphrase", errbot_pass, "-a", "-d", gpg_string])
         user_pass = str(user_pass_temp).split("'")[1].split("\\")[0]
         user_server = username + "@" + self.get_plugin('AutoSysServer').target_server
-        output = subprocess.check_output(["sshpass", "-p", user_pass, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
+        try:
+            output = subprocess.check_output(["sshpass", "-p", user_pass, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
+        except:
+            output = "Error connecting..."
         return output
     
     @botcmd
@@ -24,7 +27,7 @@ class AutoSysJob(BotPlugin):
         error = ""
         
         target_server = self.get_plugin('AutoSysServer').target_server
-        if not target_server:
+        if target_server == "":
             error = "Target server not set. Set the target server using !server target (servername)."
 
         if error == "":
@@ -61,7 +64,7 @@ class AutoSysJob(BotPlugin):
         job_name = args
         
         target_server = self.get_plugin('AutoSysServer').target_server
-        if not target_server:
+        if target_server == "":
             error = "Target server not set. Set the target server using !server target (servername)."
             
         if error == "":
