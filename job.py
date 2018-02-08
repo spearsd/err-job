@@ -5,7 +5,7 @@ class AutoSysJob(BotPlugin):
     """AutoSys job plugin for Errbot"""
 
     def ssh(self, msg, command):
-        user_array = msg.frm.split("@")
+        user_array = str(msg.frm).split("@")
         username = user_array[0]
         gpg_string = "$(gpg2 --batch --passphrase $ERRBOT_PASS -a -d /root/.password-store/" + username + ".gpg)"
         user_server = username + "@" + str(self.get_plugin('AutoSysServer').target_server)
