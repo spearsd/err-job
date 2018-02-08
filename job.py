@@ -7,6 +7,7 @@ class AutoSysJob(BotPlugin):
     def ssh(self, msg, command):
         user2 = str(msg.frm)
         user3 = user2.split("@")
+        user4 = user3[0]
         #user_array = str(msg.frm).split("@")
         #username = user_array[0]
         #gpg_string = "$(gpg2 --batch --passphrase $ERRBOT_PASS -a -d /root/.password-store/" + username + ".gpg)"
