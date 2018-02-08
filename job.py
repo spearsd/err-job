@@ -14,10 +14,7 @@ class AutoSysJob(BotPlugin):
         user_pass_temp = subprocess.check_output(["gpg2", "--batch", "--passphrase", errbot_pass, "-a", "-d", gpg_string])
         user_pass = str(user_pass_temp).split("'")[1].split("\\")[0]
         user_server = username + "@" + self.get_plugin('AutoSysServer').target_server
-        try:
-            output = subprocess.check_output(["sshpass", "-p", user_pass, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
-        except:
-            output = "0"
+        output = subprocess.check_output(["sshpass", "-p", user_pass, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
         return output
     
     @botcmd
@@ -27,14 +24,14 @@ class AutoSysJob(BotPlugin):
         error = ""
         
         try:
-            self.get_plugin('AutoSysServer').target_server
-        except NameError:
+            target_server = self.get_plugin('AutoSysServer').target_server
+        except:
             error = "Target server not set. Set the target server using !server target (servername)."
             
         if error == "":
             command = "AutoSysJob " + job_name
-            target_server = self.get_plugin('AutoSysServer').target_server
             result = str(self.ssh(msg, command))
+            
         if result.find("Job Name:") == -1:
             error = "Cannot connect to targeted server with your user."
         
@@ -65,22 +62,17 @@ class AutoSysJob(BotPlugin):
         error = ""
         job_name = args
         
-        try:
-            self.get_plugin('AutoSysServer').target_server
-        except NameError:
+         try:
+            target_server = self.get_plugin('AutoSysServer').target_server
+        except:
             error = "Target server not set. Set the target server using !server target (servername)."
             
         if error == "":
             command = "AutoSysJob " + job_name + " --rerun"
-            target_server = self.get_plugin('AutoSysServer').target_server
-            result = str(self.ssh(msg, command))
-
-        if not target_server:
-            error = "Target server not set. Set the target server using !server target (servername)."
-        else:
             yield "Starting " + job_name + " on " + target_server + "..."
             time.sleep(3)
             result = str(self.ssh(msg, command))
+            
         if result.find("Job Name:") == -1:
             error = "Cannot connect to targeted server with your user."
         
