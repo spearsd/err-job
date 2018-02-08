@@ -28,11 +28,11 @@ class AutoSysJob(BotPlugin):
         if not target_server:
             result = "Target server not set. Set the target server using !server target (servername)."
         else:
-            result = self.ssh(msg, command)
+            result = str(self.ssh(msg, command))
         if result.find("Job Name:") == -1:
             result = "Cannot connect to targeted server with your user."
         
-        result_array = str(result).split("\\n")
+        result_array = result.split("\\n")
         for r in result_array:
             yield r
         
