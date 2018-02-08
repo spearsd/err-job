@@ -7,10 +7,14 @@ class AutoSysJob(BotPlugin):
     def ssh(self, msg, command):
         user_array = str(msg.frm).split("@")
         username = user_array[0]
-        gpg_string = "$(gpg2 --batch --passphrase $ERRBOT_PASS -a -d /root/.password-store/" + username + ".gpg)"
+        gpg_string = "/root/.password-store/" + username + ".gpg)"
+        proc = subprocess.Popen(["echo $ERRBOT_PASS"], shell=True, stdout=subprocess.PIPE)
+        outs, errs = proc.communicate()
+        errbot_pass = str(outs).split("'")[1].split("\\")[0]
+        user_pass_temp = subprocess.check_output(["gpg2", "--batch", "--passphrase", errbot_pass, "-a", "-d", gpg_string])
+        user_pass = str(user_pass_temp).split("'")[1].split("\\")[0]
         user_server = username + "@" + self.get_plugin('AutoSysServer').target_server
-        print(user_server)
-        output = subprocess.check_output(["sshpass", "-p", gpg_string, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
+        output = subprocess.check_output(["sshpass", "-p", user_pass, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
         return output
     
     @botcmd
