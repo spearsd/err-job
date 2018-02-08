@@ -24,17 +24,20 @@ class AutoSysJob(BotPlugin):
         job_name = args
         target_server = self.get_plugin('AutoSysServer').target_server
         command = "AutoSysJob " + job_name
-        
+        error = ""
         if not target_server:
-            result = "Target server not set. Set the target server using !server target (servername)."
+            error = "Target server not set. Set the target server using !server target (servername)."
         else:
             result = str(self.ssh(msg, command))
         if result.find("Job Name:") == -1:
-            result = "Cannot connect to targeted server with your user."
+            error = "Cannot connect to targeted server with your user."
         
-        result_array = result.split("'")[1].split("\\n")
-        for r in result_array:
-            yield r
+        if error:
+            return error
+        else:
+            result_array = result.split("'")[1].split("\\n")
+            for r in result_array:
+                yield r
         
         ###################################################################
         #with open('/var/errbot/target_server', 'r') as file:
