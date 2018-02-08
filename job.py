@@ -17,7 +17,7 @@ class AutoSysJob(BotPlugin):
         try:
             output = subprocess.check_output(["sshpass", "-p", user_pass, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
         except:
-            output = ""
+            output = "0"
         return output
     
     @botcmd
@@ -59,20 +59,40 @@ class AutoSysJob(BotPlugin):
     @botcmd
     def job_start(self, msg, args):
         """Start requested job"""
+        
+        string = ""
         job_name = args
         target_server = self.get_plugin('AutoSysServer').target_server
+        command = "AutoSysJob " + job_name + " --rerun"
+        error = ""
+        if not target_server:
+            error = "Target server not set. Set the target server using !server target (servername)."
+        else:
+            yield "Starting " + job_name + " on " + target_server + "..."
+            time.sleep(3)
+            result = str(self.ssh(msg, command))
+        if result.find("Job Name:") == -1:
+            error = "Cannot connect to targeted server with your user."
+        
+        if error:
+            return error
+        else:
+            result_array = result.split("'")[1].split("\\n")
+            for r in result_array:
+                yield r
+                
+        #job_name = args
+        #target_server = self.get_plugin('AutoSysServer').target_server
         #with open('/var/errbot/target_server', 'r') as file:
         #    target_server = str(file.read())
         #login
         #source file
-        yield "Starting " + job_name + " on " + target_server + "..."
         #poll for RU status
-        time.sleep(3)
-        yield job_name + " has started."
-        string = "Server:  \t\t" + target_server 
-        string += "\nJob Name:  \t" + job_name
-        string += "\nLast Start: \t" + "01/08/2018 21:35:03"
-        string += "\nLast End: \t\t" + "01/08/2018 21:35:52"
-        string += "\nStatus: \t\t" + "Running"
-        yield string
+        #yield job_name + " has started."
+        #string = "Server:  \t\t" + target_server 
+        #string += "\nJob Name:  \t" + job_name
+        #string += "\nLast Start: \t" + "01/08/2018 21:35:03"
+        #string += "\nLast End: \t\t" + "01/08/2018 21:35:52"
+        #string += "\nStatus: \t\t" + "Running"
+        #yield string
         #optionally poll for SU status
