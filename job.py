@@ -15,7 +15,7 @@ class AutoSysJob(BotPlugin):
         user_pass = str(user_pass_temp).split("'")[1].split("\\")[0]
         user_server = username + "@" + self.get_plugin('AutoSysServer').target_server
         try:
-            output = subprocess.check_output(["sshpass", "-p", user_pass, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command])
+            output = subprocess.check_output(["sshpass", "-p", user_pass, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command], stderr=subprocess.STDOUT)
         except:
             output = "Error connecting..."
         return output
