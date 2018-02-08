@@ -62,7 +62,7 @@ class AutoSysJob(BotPlugin):
         error = ""
         job_name = args
         
-         try:
+        try:
             target_server = self.get_plugin('AutoSysServer').target_server
         except:
             error = "Target server not set. Set the target server using !server target (servername)."
