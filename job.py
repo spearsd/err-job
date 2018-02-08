@@ -13,7 +13,7 @@ class AutoSysJob(BotPlugin):
         #gpg_string = "$(gpg2 --batch --passphrase $ERRBOT_PASS -a -d /root/.password-store/" + username + ".gpg)"
         #user_server = username + "@" + str(self.get_plugin('AutoSysServer').target_server)
         #output = subprocess.check_output(["sshpass", "-p", gpg_string, "ssh", "-o", "UserKnownHostsFile=/dev/null", "-o", "StrictHostKeyChecking=no", user_server, command], shell=True)
-        return user3
+        return user4
     
     @botcmd
     def job_status(self, msg, args):
