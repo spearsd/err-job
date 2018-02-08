@@ -20,10 +20,10 @@ class AutoSysJob(BotPlugin):
         target_server = self.get_plugin('AutoSysServer').target_server
         command = "AutoSysJob " + job_name
         
-        if target_server == "":
+        if not target_server:
             result = "Target server not set. Set the target server using !server target (servername)."
         else:
-            result = ssh(msg, command)
+            result = self.ssh(msg, command)
             
         if result.find("Job Name:") == -1:
             result = "Cannot connect to targeted server with your user."
