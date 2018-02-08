@@ -23,14 +23,17 @@ class AutoSysJob(BotPlugin):
     @botcmd
     def job_status(self, msg, args):
         """Return job status"""
-        string = ""
         job_name = args
-        target_server = self.get_plugin('AutoSysServer').target_server
-        command = "AutoSysJob " + job_name
         error = ""
-        if not target_server:
+        
+        try:
+            self.get_plugin('AutoSysServer').target_server
+        except NameError:
             error = "Target server not set. Set the target server using !server target (servername)."
-        else:
+            
+        if error == "":
+            command = "AutoSysJob " + job_name
+            target_server = self.get_plugin('AutoSysServer').target_server
             result = str(self.ssh(msg, command))
         if result.find("Job Name:") == -1:
             error = "Cannot connect to targeted server with your user."
@@ -59,12 +62,19 @@ class AutoSysJob(BotPlugin):
     @botcmd
     def job_start(self, msg, args):
         """Start requested job"""
-        
-        string = ""
-        job_name = args
-        target_server = self.get_plugin('AutoSysServer').target_server
-        command = "AutoSysJob " + job_name + " --rerun"
         error = ""
+        job_name = args
+        
+        try:
+            self.get_plugin('AutoSysServer').target_server
+        except NameError:
+            error = "Target server not set. Set the target server using !server target (servername)."
+            
+        if error == "":
+            command = "AutoSysJob " + job_name + " --rerun"
+            target_server = self.get_plugin('AutoSysServer').target_server
+            result = str(self.ssh(msg, command))
+
         if not target_server:
             error = "Target server not set. Set the target server using !server target (servername)."
         else:
