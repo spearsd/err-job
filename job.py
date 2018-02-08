@@ -23,7 +23,7 @@ class AutoSysJob(BotPlugin):
         string = ""
         job_name = args
         target_server = self.get_plugin('AutoSysServer').target_server
-        command = "nohup AutoSysJob " + job_name + " > /dev/null 2>&1 &"
+        command = "AutoSysJob " + job_name
         
         if not target_server:
             result = "Target server not set. Set the target server using !server target (servername)."
