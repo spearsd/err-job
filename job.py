@@ -32,7 +32,7 @@ class AutoSysJob(BotPlugin):
         if result.find("Job Name:") == -1:
             result = "Cannot connect to targeted server with your user."
         
-        result_array = result.split("\\n").split("'")[1]
+        result_array = result.split("'")[1].split("\\n")
         for r in result_array:
             yield r
         
